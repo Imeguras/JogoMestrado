@@ -16,13 +16,14 @@ public class TileBehaviour : MonoBehaviour{
 	
 	private List<GameObject> lanes;
 	[SerializeField]
-	private float updateVisual= 24.0f;
+	private float updateVisual;
 	private List<Tuple<int, GameObject>> spawnedTiles;
 	private Color[] colors =  {Color.red, Color.blue, Color.green, Color.yellow, Color.magenta, Color.cyan, Color.white, Color.black, Color.grey, Color.gray};
 	public static List<int> collisions;
 
 	void Awake(){
 		loader_instance = LevelLoad.CreateInstance<LevelLoad>();
+		loader_instance.InjectFakeLevelsIntoPersistentDir(); 
 		tileLevel= loader_instance.LoadTileLevel("level1");
 		spawnedTiles = new List<Tuple<int, GameObject>>();
 		lanes = new List<GameObject>();
@@ -143,7 +144,7 @@ public class TileBehaviour : MonoBehaviour{
 					
 					//check if the lane is colliding with a spawned tile
 					if(collisions.Contains(laneIndex)){
-						Debug.Log("Hit"+laneIndex);
+						//FateNotes.GameState.Instance.score++;
 					}else{
 						Debug.Log("Miss"+laneIndex);
 					}	
