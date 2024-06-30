@@ -727,6 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1964602101}
+  speed: 5
 --- !u!114 &1964602106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,7 +767,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_ActionId: 6e0c7ad5-9f4b-41e6-a108-a6550b07110c
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -817,6 +818,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 358cd177-ed52-4472-80c1-3729112a2031
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1964602105}
+        m_TargetAssemblyTypeName: CharacterMovement, Assembly-CSharp
+        m_MethodName: GyroscopeMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 11ebc193-8135-4d62-83a7-b035d04b6384
+    m_ActionName: Player/Gyroscope[/Accelerometer/acceleration]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Touch
   m_DefaultActionMap: Player

@@ -1,0 +1,8 @@
+{"tiles":[{
+		"tileLane": 0,
+		"tileSpawn":0.10,
+		"tileHit":0.20,
+		"tileMiss":0.30
+	}
+]
+}
