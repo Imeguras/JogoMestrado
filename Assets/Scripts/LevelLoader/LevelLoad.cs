@@ -10,6 +10,7 @@ namespace FateNotes.LevelLoader{
 	public class LevelLoad : ScriptableObject{
 		public class TileLevel{
 			public List<Tile> tiles {get; set;}
+			public int laneCount {get; set;}
 			public TileLevel(){
 				tiles = new List<Tile>();
 			}
@@ -51,7 +52,7 @@ namespace FateNotes.LevelLoader{
 
 			string jsonString = File.ReadAllText(path);
 			TileLevel tileLevel = JsonSerializer.Deserialize<TileLevel>(jsonString);
-			
+
 			return tileLevel;
 		}
 	}

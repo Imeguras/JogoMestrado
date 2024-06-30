@@ -1,8 +1,33 @@
-{"tiles":[{
-		"tileLane": 0,
-		"tileSpawn":0.10,
-		"tileHit":0.20,
-		"tileMiss":0.30
-	}
-]
+{
+	"tiles":[
+		{
+			"tileLane": 0,
+			"tileSpawn":0.50,
+			"tileHit":0.20,
+			"tileMiss":1.30
+			
+		}, 
+		{
+			"tileLane": 0,
+			"tileSpawn":1.50,
+			"tileHit":0.20,
+			"tileMiss":1.30
+			
+		},
+		{
+			"tileLane": 3,
+			"tileSpawn":1.60,
+			"tileHit":0.20,
+			"tileMiss":1.30
+			
+		},
+		{
+			"tileLane": 1,
+			"tileSpawn":1.70,
+			"tileHit":0.20,
+			"tileMiss":5
+			
+		}
+	],	
+	"laneCount": 4
 }

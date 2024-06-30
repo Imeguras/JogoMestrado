@@ -769,6 +769,133 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Tile"",
+            ""id"": ""aa32ca0e-5738-4b7c-bf2b-337664e460d2"",
+            ""actions"": [
+                {
+                    ""name"": ""LaneClicking"",
+                    ""type"": ""Value"",
+                    ""id"": ""6d7a893a-98ec-4d72-89df-d4c0faff6aa7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""57ac0cd9-08ad-4567-94bf-1588a550cc1f"",
+                    ""path"": ""Dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""f4bd1818-2ec2-4db4-a60f-adbe650789fa"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""ad2ac8af-21a1-4787-9924-b5b66e114149"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5d27d247-50bc-4702-9d94-1d29dc879401"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ca6d9973-abfa-4540-9644-a90ba37a3d2c"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""aa7745a1-ee95-443c-9715-1ae63c1e7534"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""d56330a4-5b80-45a6-b863-41b33a0a51ce"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""af281290-b958-49bf-a604-f32ecc858917"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""14d3e43e-1fc9-4620-870c-f5106c6e7165"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1209477c-cd31-406a-9146-40c89eb20ef1"",
+                    ""path"": ""<Touchscreen>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LaneClicking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -852,6 +979,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Tile
+        m_Tile = asset.FindActionMap("Tile", throwIfNotFound: true);
+        m_Tile_LaneClicking = m_Tile.FindAction("LaneClicking", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1097,6 +1227,52 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Tile
+    private readonly InputActionMap m_Tile;
+    private List<ITileActions> m_TileActionsCallbackInterfaces = new List<ITileActions>();
+    private readonly InputAction m_Tile_LaneClicking;
+    public struct TileActions
+    {
+        private @InputMap m_Wrapper;
+        public TileActions(@InputMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LaneClicking => m_Wrapper.m_Tile_LaneClicking;
+        public InputActionMap Get() { return m_Wrapper.m_Tile; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TileActions set) { return set.Get(); }
+        public void AddCallbacks(ITileActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TileActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TileActionsCallbackInterfaces.Add(instance);
+            @LaneClicking.started += instance.OnLaneClicking;
+            @LaneClicking.performed += instance.OnLaneClicking;
+            @LaneClicking.canceled += instance.OnLaneClicking;
+        }
+
+        private void UnregisterCallbacks(ITileActions instance)
+        {
+            @LaneClicking.started -= instance.OnLaneClicking;
+            @LaneClicking.performed -= instance.OnLaneClicking;
+            @LaneClicking.canceled -= instance.OnLaneClicking;
+        }
+
+        public void RemoveCallbacks(ITileActions instance)
+        {
+            if (m_Wrapper.m_TileActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITileActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TileActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TileActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TileActions @Tile => new TileActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1161,5 +1337,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface ITileActions
+    {
+        void OnLaneClicking(InputAction.CallbackContext context);
     }
 }
