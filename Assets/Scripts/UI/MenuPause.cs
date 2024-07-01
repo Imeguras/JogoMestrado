@@ -32,6 +32,7 @@ namespace FateNotes{
 			}
 		}
 		public void ResumeGame(){
+			
 			if(GameState.Instance.isGamePaused){
 				StartCoroutine(SlowToState());
 			}
@@ -59,6 +60,8 @@ namespace FateNotes{
 		IEnumerator SlowToState(){
 			
 			if(GameState.Instance.isGamePaused){
+				settingsMenu.SetActive(false);
+
 				buttonMenu.SetActive(true); 
 				//set transparency for buttonMenu
 				
@@ -80,6 +83,7 @@ namespace FateNotes{
 
 				pauseMenu.SetActive(false);
 			}else{
+				settingsMenu.SetActive(false);
 				pauseMenu.SetActive(true);
 				GameState.Instance.isGamePaused = true;
 				for (int i = 2; i < 30; i++){
@@ -90,6 +94,7 @@ namespace FateNotes{
 				}
 				Time.timeScale = 0;
 				buttonMenu.SetActive(false);
+				
 			}
 		
 		}
