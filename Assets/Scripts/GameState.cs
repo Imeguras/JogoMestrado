@@ -14,9 +14,16 @@ namespace FateNotes{
 			}
 		}
 		public event EventHandler<float> ValueChanged;
+		public event EventHandler<int> ScoreChanged;
 		
-		
-		public int score;
+		public int score{get{
+			return score;
+		}
+		set{
+			score = value;
+			OnScoreChanged(score);
+
+		}}
 		public int[] levelsUnlocked;
 		public int[] levelsCompleted;
 		public int highScore;
@@ -33,10 +40,13 @@ namespace FateNotes{
 		protected virtual void OnValueChanged(float newValue){
 			ValueChanged?.Invoke(this, newValue);
 		}
+		protected virtual void OnScoreChanged(int newValue){
+			ScoreChanged?.Invoke(this, newValue);
+		}
 
 
 		private GameState(){
-			score = 0;
+			//score;
 			levelsUnlocked = new int[5];
 			levelsCompleted = new int[5];
 			highScore = 0;

@@ -4,6 +4,7 @@ using UnityEngine;
 using FateNotes.LevelLoader;
 using System;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 namespace FateNotes{
 
 public class TileBehaviour : MonoBehaviour{
@@ -51,6 +52,9 @@ public class TileBehaviour : MonoBehaviour{
 			//fill in the screen
 			lane.transform.localScale = new Vector3(widthRatio, 1, 1);
 			lanes.Add(lane);
+
+			
+			
 		}
 		// set color for lanes
 
@@ -151,8 +155,12 @@ public class TileBehaviour : MonoBehaviour{
 					//check if the lane is colliding with a spawned tile
 					if(collisions.Contains(laneIndex)){
 						//FateNotes.GameState.Instance.score++;
+						GameState.Instance.score+=100; 
+						
 					}else{
-						Debug.Log("Miss"+laneIndex);
+						//grab canvas write lost and then load scene 0 
+						SceneManager.LoadSceneAsync(0);
+					
 					}	
 				}
 				laneIndex++; 

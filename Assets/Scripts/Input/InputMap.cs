@@ -38,7 +38,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""c5f7624a-dfbd-4167-ad84-c62cf3498b2d"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -62,15 +62,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Gyroscope"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""11ebc193-8135-4d62-83a7-b035d04b6384"",
-                    ""expectedControlType"": ""Vector3"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -258,61 +249,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Touch;Gamepad"",
                     ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""55ee1a6c-ab5a-4dd0-9da0-9e410303ee1d"",
-                    ""path"": ""<Accelerometer>/acceleration"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""Gyroscope"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f2326f92-088f-47e5-91c9-07cdd2de8c4c"",
-                    ""path"": ""<Gyroscope>/angularVelocity"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""Gyroscope"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e22cd7ef-e4a8-48ed-8ea0-5e328aa5046e"",
-                    ""path"": ""<MagneticFieldSensor>/magneticField"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""Gyroscope"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""03121cb3-da35-4201-a223-397863fe45c3"",
-                    ""path"": ""<LinearAccelerationSensor>/acceleration"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""Gyroscope"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c5c212c6-181d-4d61-878a-f1318335608b"",
-                    ""path"": ""<GravitySensor>/gravity"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""Gyroscope"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1053,7 +989,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Gyroscope = m_Player.FindAction("Gyroscope", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1134,7 +1069,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Gyroscope;
     public struct PlayerActions
     {
         private @InputMap m_Wrapper;
@@ -1143,7 +1077,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Gyroscope => m_Wrapper.m_Player_Gyroscope;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1165,9 +1098,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Gyroscope.started += instance.OnGyroscope;
-            @Gyroscope.performed += instance.OnGyroscope;
-            @Gyroscope.canceled += instance.OnGyroscope;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1184,9 +1114,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Gyroscope.started -= instance.OnGyroscope;
-            @Gyroscope.performed -= instance.OnGyroscope;
-            @Gyroscope.canceled -= instance.OnGyroscope;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1419,7 +1346,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnGyroscope(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

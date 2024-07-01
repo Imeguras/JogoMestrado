@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "c5f7624a-dfbd-4167-ad84-c62cf3498b2d",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -40,15 +40,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Gyroscope",
-                    "type": "PassThrough",
-                    "id": "11ebc193-8135-4d62-83a7-b035d04b6384",
-                    "expectedControlType": "Vector3",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -236,61 +227,6 @@
                     "processors": "",
                     "groups": "Touch;Gamepad",
                     "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "55ee1a6c-ab5a-4dd0-9da0-9e410303ee1d",
-                    "path": "<Accelerometer>/acceleration",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Gyroscope",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f2326f92-088f-47e5-91c9-07cdd2de8c4c",
-                    "path": "<Gyroscope>/angularVelocity",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Gyroscope",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e22cd7ef-e4a8-48ed-8ea0-5e328aa5046e",
-                    "path": "<MagneticFieldSensor>/magneticField",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Gyroscope",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "03121cb3-da35-4201-a223-397863fe45c3",
-                    "path": "<LinearAccelerationSensor>/acceleration",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Gyroscope",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c5c212c6-181d-4d61-878a-f1318335608b",
-                    "path": "<GravitySensor>/gravity",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Gyroscope",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

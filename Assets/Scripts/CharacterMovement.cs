@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour{
 		var angle = Mathf.LerpAngle(transform.eulerAngles.y, actualAngleTarget, 0.1f);
 		transform.rotation = Quaternion.Euler(0, angle, 0);*/
 		//lerp angle.Y towards target_angle
-		var angle = Mathf.LerpAngle(transform.eulerAngles.y, target_angle, 0.1f);
+		var angle = Mathf.LerpAngle(transform.eulerAngles.y, target_angle, 0.05f);
 		transform.rotation = Quaternion.Euler(0, angle, 0);
 
 		
@@ -66,7 +66,16 @@ public class CharacterMovement : MonoBehaviour{
 		Vector2 moveInput = context.ReadValue<Vector2>();
 		
 		if(context.phase == InputActionPhase.Performed){
-			rb.AddForce(new Vector3(moveInput.x*speed, 0, moveInput.y*speed), ForceMode.Impulse);
+			float angleYRadians = this.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
+
+			// Calculate the forward and right direction vectors based on the angleY
+			Vector3 forward = new Vector3(Mathf.Sin(angleYRadians), 0, Mathf.Cos(angleYRadians));
+			Vector3 right = new Vector3(Mathf.Cos(angleYRadians), 0, -Mathf.Sin(angleYRadians));
+
+			// Calculate the force based on the input vector and the facing direction
+			float forceX = moveInput.x * right.x + moveInput.y * forward.x;
+			float forceZ = moveInput.x * right.z + moveInput.y * forward.z;
+			rb.AddForce(new Vector3(forceX*speed, 0, forceZ*speed), ForceMode.Impulse);
 		}
 
 		
@@ -90,7 +99,8 @@ public class CharacterMovement : MonoBehaviour{
 		if(context.phase == InputActionPhase.Performed){
 			Debug.Log("Jump");
 			
-			if(!Physics.Raycast(transform.position, Vector3.down, 0.4f)){
+			
+			if(!Physics.Raycast(transform.position, Vector3.down, 2f)){
 				rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
 			}
 			
