@@ -11,6 +11,7 @@ namespace FateNotes.LevelLoader{
 		public class TileLevel{
 			public List<Tile> tiles {get; set;}
 			public int laneCount {get; set;}
+			public string songTrack {get; set;}
 			public TileLevel(){
 				tiles = new List<Tile>();
 			}
@@ -32,7 +33,7 @@ namespace FateNotes.LevelLoader{
 		public void InjectFakeLevelsIntoPersistentDir(){
 			//TODO remove this 
 
-			string _level1= "{\"tiles\":[{\"tileLane\": 0,\"tileSpawn\":0.50,\"tileHit\":0.20,\"tileMiss\":1.30}, {\"tileLane\": 0,\"tileSpawn\":1.50,\"tileHit\":0.20,\"tileMiss\":1.30},{\"tileLane\": 3,\"tileSpawn\":1.60,\"tileHit\":0.20,\"tileMiss\":1.30},{\"tileLane\": 1,\"tileSpawn\":1.70,\"tileHit\":0.20,\"tileMiss\":5}],\"laneCount\": 4}";
+			string _level1= "{\"tiles\":[{\"tileLane\": 0,\"tileSpawn\":0.50,\"tileHit\":0.20,\"tileMiss\":1.30}, {\"tileLane\": 0,\"tileSpawn\":1.50,\"tileHit\":0.20,\"tileMiss\":1.30},{\"tileLane\": 3,\"tileSpawn\":1.60,\"tileHit\":0.20,\"tileMiss\":1.30},{\"tileLane\": 1,\"tileSpawn\":1.70,\"tileHit\":0.20,\"tileMiss\":5}],\"laneCount\": 4, \"songTrack\": \"level1.wav\"}";
 
 			//write it to PersistentDataPath	
 			string path = Application.persistentDataPath + "/Resources/Levels/level1.json";
@@ -62,7 +63,7 @@ namespace FateNotes.LevelLoader{
 			
 		}
 		//TODO Make this async
-		public TileLevel LoadTileLevel(string levelName){
+		public TileLevel LoadTileLevel(string levelName, GameObject _game){
 			//Aparently you can't use paths like bellow.
 
 			string path = Application.persistentDataPath + "/Resources/Levels/" + levelName + ".json";
@@ -71,7 +72,19 @@ namespace FateNotes.LevelLoader{
 			//read all text from the file
 			string jsonString = File.ReadAllText(path);
 			TileLevel tileLevel = JsonSerializer.Deserialize<TileLevel>(jsonString);
+			//string audioPath = string.Format("file://{0}", Application.persistentDataPath + "/Resources/Levels/"+);
+			//load the audio
+			int _samplerate = 48000;
+			//var clip = AudioClip.Create(audioPath,_samplerate*60, 2, _samplerate, true);
+			//clip.LoadAudioData();
+			//clip.LoadAudioData();
+			var k = _game.GetComponent<AudioSource>();
+			
+			Debug.Log("Loaded song track: "+tileLevel.songTrack);
+			var clip = Resources.Load("Levels/"+tileLevel.songTrack) as AudioClip;
 
+			k.clip = clip;
+			
 			return tileLevel;
 		}
 	}

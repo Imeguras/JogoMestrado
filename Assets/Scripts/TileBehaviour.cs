@@ -4,7 +4,6 @@ using UnityEngine;
 using FateNotes.LevelLoader;
 using System;
 using UnityEngine.InputSystem;
-
 namespace FateNotes{
 
 public class TileBehaviour : MonoBehaviour{
@@ -15,16 +14,22 @@ public class TileBehaviour : MonoBehaviour{
 	private GameObject spawn_ref; 
 	
 	private List<GameObject> lanes;
+	//workaround for android 
+	
 	[SerializeField]
 	private float updateVisual;
 	private List<Tuple<int, GameObject>> spawnedTiles;
 	private Color[] colors =  {Color.red, Color.blue, Color.green, Color.yellow, Color.magenta, Color.cyan, Color.white, Color.black, Color.grey, Color.gray};
 	public static List<int> collisions;
+	
 
 	void Awake(){
+	
 		loader_instance = LevelLoad.CreateInstance<LevelLoad>();
 		loader_instance.InjectFakeLevelsIntoPersistentDir(); 
-		tileLevel= loader_instance.LoadTileLevel("level1");
+		tileLevel= loader_instance.LoadTileLevel("level1", spawn_ref);
+		
+		//spawn_ref.GetComponent<AudioSource>().Play();
 		spawnedTiles = new List<Tuple<int, GameObject>>();
 		lanes = new List<GameObject>();
 		collisions = new List<int>();
@@ -57,6 +62,7 @@ public class TileBehaviour : MonoBehaviour{
 	}
     void Start(){
 		if(tileLevel != null){
+			this.spawn_ref.GetComponent<AudioSource>().Play();
 			StartCoroutine(BehaviourManager());
 		}
 		

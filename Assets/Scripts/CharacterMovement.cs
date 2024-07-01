@@ -14,7 +14,14 @@ public class CharacterMovement : MonoBehaviour{
 	private float speed = 5; 
 	private PlayerInput playerInput;
 
-
+	void onEnable(){
+		#if UNITY_ANDROID
+			InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
+			InputSystem.EnableDevice(UnityEngine.InputSystem.Accelerometer.current);
+		#endif
+		
+		playerInput.ActivateInput();
+	}
     void Start(){
 		
 		
@@ -22,8 +29,25 @@ public class CharacterMovement : MonoBehaviour{
     void Update(){
         
     }
+	
+	void lateUpdate(){
+		Vector3 vector3 = UnityEngine.InputSystem.Gyroscope.current.angularVelocity.ReadValue();
+		Debug.Log("Gyroscope"+vector3);
+		
+
+	}
+	void onDisable(){
+		#if UNITY_ANDROID
+			InputSystem.DisableDevice(UnityEngine.InputSystem.Gyroscope.current);
+			InputSystem.DisableDevice(UnityEngine.InputSystem.Accelerometer.current);
+		#endif
+	}
+	
 	public void Move(InputAction.CallbackContext context){
 		Debug.Log("Move");
+
+		//apply a red tint
+		
 		
 		/*Vector2 moveInput = context.ReadValue<Vector2>();
 		
