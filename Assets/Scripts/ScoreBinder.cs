@@ -15,6 +15,7 @@ public class ScoreBinder : MonoBehaviour{
 	}
 	void updateScore(int newValue){
 		score.text = "Score: "+ newValue;
+		
 	}
 
 }

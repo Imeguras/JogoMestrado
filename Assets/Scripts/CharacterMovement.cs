@@ -24,10 +24,7 @@ public class CharacterMovement : MonoBehaviour{
 	private float target_angle=0;
 
 	void onEnable(){
-		#if UNITY_ANDROID
-			InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
-			InputSystem.EnableDevice(UnityEngine.InputSystem.Accelerometer.current);
-		#endif
+		
 		
 		playerInput.ActivateInput();
 	}
@@ -46,15 +43,17 @@ public class CharacterMovement : MonoBehaviour{
 		//lerp angle.Y towards target_angle
 		var angle = Mathf.LerpAngle(transform.eulerAngles.y, target_angle, 0.05f);
 		transform.rotation = Quaternion.Euler(0, angle, 0);
+		//if y position is bellow -10, reset position
+		if(transform.position.y < -10){
+			transform.position = new Vector3(50, 15,50);
+			rb.velocity = Vector3.zero;
+		}
 
 		
 		
 	}
 	void onDisable(){
-		#if UNITY_ANDROID
-			InputSystem.DisableDevice(UnityEngine.InputSystem.Gyroscope.current);
-			InputSystem.DisableDevice(UnityEngine.InputSystem.Accelerometer.current);
-		#endif
+	
 	}
 	
 	public void Move(InputAction.CallbackContext context){
@@ -100,9 +99,9 @@ public class CharacterMovement : MonoBehaviour{
 			Debug.Log("Jump");
 			
 			
-			if(!Physics.Raycast(transform.position, Vector3.down, 2f)){
+			//if(!Physics.Raycast(transform.position, Vector3.down, 2f)){
 				rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
-			}
+			//}
 			
 			
 		}

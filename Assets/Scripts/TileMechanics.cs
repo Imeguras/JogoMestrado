@@ -38,6 +38,7 @@ namespace FateNotes{
 		}
 		void OnTriggerEnter(Collider other){
 			TileBehaviour.collisions.Add(lane);
+			
 
 		}
 		

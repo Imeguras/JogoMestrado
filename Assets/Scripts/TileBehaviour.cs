@@ -81,7 +81,16 @@ public class TileBehaviour : MonoBehaviour{
 			float timeTillSpawn = tile.tileSpawn;
 			
 			yield return StartCoroutine(SpawnTile(tile.tileSpawn, tile));
+			
 		}
+		while (spawnedTiles.Count <= tileLevel.tiles.Count){
+			yield return new WaitForSeconds(1);
+						
+
+		}
+		SceneManager.LoadScene(0);
+		
+
 	}
     IEnumerator SpawnTile(float timeSeconds, LevelLoad.Tile tile){
 		yield return new WaitForSeconds(timeSeconds);
@@ -106,6 +115,8 @@ public class TileBehaviour : MonoBehaviour{
 		
 
 		yield return StartCoroutine(Fall(cube, tile.tileMiss));
+
+
 		
 
 	}
@@ -156,10 +167,12 @@ public class TileBehaviour : MonoBehaviour{
 					if(collisions.Contains(laneIndex)){
 						//FateNotes.GameState.Instance.score++;
 						GameState.Instance.score+=100; 
+						Debug.Log("Score "+GameState.Instance.score);
+						
 						
 					}else{
 						//grab canvas write lost and then load scene 0 
-						SceneManager.LoadSceneAsync(0);
+						SceneManager.LoadScene(0);
 					
 					}	
 				}

@@ -16,14 +16,7 @@ namespace FateNotes{
 		public event EventHandler<float> ValueChanged;
 		public event EventHandler<int> ScoreChanged;
 		
-		public int score{get{
-			return score;
-		}
-		set{
-			score = value;
-			OnScoreChanged(score);
-
-		}}
+		public int score; 
 		public int[] levelsUnlocked;
 		public int[] levelsCompleted;
 		public int highScore;

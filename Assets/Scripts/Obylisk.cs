@@ -41,6 +41,14 @@ public class Obylisk : MonoBehaviour
 	void LoadLevel(){
 		
 		Debug.Log("Loading Level "+level);
-		SceneManager.LoadScene(level);
+		StartCoroutine(LoadLevelAsync());
+	}
+	public IEnumerator LoadLevelAsync(){
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(level); 
+		
+		while (!asyncLoad.isDone){
+			
+			yield return new WaitForSeconds(3);
+		}
 	}
 }
